@@ -7,6 +7,7 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat-multi'),
     autoprefixer = require("gulp-autoprefixer"),
+    babel = require('gulp-babel'),
     rename = require('gulp-rename')
 
 gulp.task('css', function() {
@@ -25,6 +26,9 @@ gulp.task('js', function() {
     concat({
         'app.js': ['./src/js/vendor/**/*.js', './src/js/common.js', './src/js/**/*.js']
     })
+    .pipe(babel({
+        presets: ['env']
+    }))
     .pipe(uglify())
     .pipe(rename({ suffix: '.min' }))
     .pipe(gulp.dest('./app/js/'));

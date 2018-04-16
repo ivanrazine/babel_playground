@@ -7,11 +7,19 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat-multi'),
     notify = require("gulp-notify"),
+    babel = require('gulp-babel'),
     browserSync = require('browser-sync').create();
 
 gulp.task('jsDev', function() {
     concat({
         'app.js': ['./src/js/vendor/**/*.js', './src/js/common.js', './src/js/**/*.js']
+    })
+    .pipe(babel({
+        presets: ['env']
+    }))
+    .on('error', function(err) {
+        notify().write(err);
+        this.emit('end');
     })
     .pipe(gulp.dest('./app/js/'));
 });

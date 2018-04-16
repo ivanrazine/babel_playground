@@ -332,3 +332,11 @@ template {
 .hellow-world {
   transition: all .3s ease;
 }
+
+.blue {
+  color: blue;
+}
+
+.red {
+  color: red;
+}
